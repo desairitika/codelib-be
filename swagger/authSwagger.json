@@ -1,0 +1,99 @@
+{
+  "/auth/register": {
+    "post": {
+      "summary": "Register a new user",
+      "description": "Registers a new user with the provided information",
+      "tags": ["Auth"],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The name of the new user"
+                },
+                "lastname": {
+                  "type": "string",
+                  "description": "The lastname of the new user"
+                },
+                "username": {
+                  "type": "string",
+                  "description": "The username of the new user"
+                },
+                "email": {
+                  "type": "string",
+                  "format": "email",
+                  "description": "The email address of the new user"
+                },
+                "password": {
+                  "type": "string",
+                  "description": "The password of the new user"
+                }
+              },
+              "required": ["name", "lastname", "username", "email", "password"]
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": {
+          "description": "User created successfully"
+        },
+        "400": {
+          "description": "Invalid Payload"
+        },
+        "401": {
+          "description": "Unauthorized. Authentication is missing or invalid."
+        },
+        "403": {
+          "description": "Forbidden. User does not have permission to access this resource."
+        },
+        "500": {
+          "description": "Internal server error"
+        }
+      }
+    }
+  },
+  "/auth/login": {
+    "post": {
+      "summary": "Authenticate user and get JWT token",
+      "description": "Endpoint to authenticate user and receive JWT token",
+      "tags": ["Auth"],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Success"
+        },
+        "400": {
+          "description": "Invalid Payload"
+        },
+        "401": {
+          "description": "Invalid credentials!"
+        },
+        "500": {
+          "description": "Internal server error"
+        }
+      }
+    }
+  }
+}

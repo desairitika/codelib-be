@@ -1,0 +1,211 @@
+{
+  "/problems/{id}/solutions": {
+    "get": {
+      "summary": "Get list of solution",
+      "description": "Endpoint to retrieve list of solutions",
+      "tags": ["Solutions"],
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "problemId",
+          "in": "path",
+          "description": "ID of the problem to retrieve",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success"
+        },
+        "500": {
+          "description": "Internal server error. Something went wrong on the server side."
+        }
+      }
+    },
+    "post": {
+      "summary": "Create your solution",
+      "description": "Endpoint to create solution",
+      "tags": ["Solutions"],
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "problemId",
+          "in": "path",
+          "description": "ID of the problem to retrieve",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "isBestSolution": {
+                  "type": "boolean"
+                },
+                "language": {
+                  "type": "string",
+                  "enum": ["JAVASCRIPT", "JAVA", "PYTHON"]
+                }
+              },
+              "required": ["code", "language"]
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": {
+          "description": "Created Successfully"
+        },
+        "500": {
+          "description": "Internal server error. Something went wrong on the server side."
+        }
+      }
+    }
+  },
+  "/solutions/{solutionId}": {
+    "get": {
+      "summary": "Get solution by ID",
+      "description": "Retrieve solution details by ID",
+      "tags": ["Solutions"],
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "solutionId",
+          "in": "path",
+          "description": "ID of the solution to retrieve",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful operation"
+        },
+        "500": {
+          "description": "Internal server error. Something went wrong on the server side."
+        }
+      }
+    },
+    "put": {
+      "summary": "Update solution by ID",
+      "description": "Update solution details by ID",
+      "tags": ["Solutions"],
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "solutionId",
+          "in": "path",
+          "description": "ID of the solution to update",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "isBestSolution": {
+                  "type": "boolean"
+                },
+                "language": {
+                  "type": "string",
+                  "enum": ["JAVASCRIPT", "JAVA", "PYTHON"]
+                }
+              },
+              "required": ["code", "language"]
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Solution updated successfully"
+        },
+        "500": {
+          "description": "Internal server error. Something went wrong on the server side."
+        }
+      }
+    },
+    "delete": {
+      "summary": "Delete solution by ID",
+      "description": "Delete solution by ID",
+      "tags": ["Solutions"],
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "solutionId",
+          "in": "path",
+          "description": "ID of the solution to delete",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "Solution deleted successfully"
+        },
+        "401": {
+          "description": "Unauthorized. Authentication is missing or invalid."
+        },
+        "403": {
+          "description": "Forbidden. User does not have permission to access this resource."
+        },
+        "404": {
+          "description": "Problem not found"
+        },
+        "500": {
+          "description": "Internal server error. Something went wrong on the server side."
+        }
+      }
+    }
+  }
+}

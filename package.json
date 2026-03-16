@@ -1,0 +1,37 @@
+{
+  "name": "code-lib",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/server",
+    "mon": "nodemon ./bin/server"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "dotenv": "^16.4.5",
+    "dotenv-safe": "^8.2.0",
+    "exceljs": "^4.4.0",
+    "express": "^4.19.2",
+    "googleapis": "^140.0.1",
+    "http-errors": "~1.6.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.8.0",
+    "mongoose": "^7.3.2",
+    "morgan": "~1.9.1",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.14",
+    "otp-generator": "^4.0.1",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "pug": "^3.0.2",
+    "swagger-ui-express": "^5.0.0",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.9"
+  }
+}

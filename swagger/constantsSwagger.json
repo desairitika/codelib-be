@@ -1,0 +1,70 @@
+{
+  "/constants": {
+    "get": {
+      "summary": "Retrieve application constants",
+      "description": "Public endpoint returning non-sensitive configuration constants. No authentication required. Clients use `publicGet` and set `skipAuth=true`.",
+      "tags": ["Constants"],
+      "responses": {
+        "200": {
+          "description": "Constants fetched successfully"
+        },
+        "500": {
+          "description": "Internal server error"
+        }
+      }
+    },
+    "post": {
+      "summary": "Create new constant",
+      "description": "Protected endpoint; requires a valid JWT.",
+      "tags": ["Constants"],
+      "responses": {
+        "201": { "description": "Constant created" },
+        "400": { "description": "Invalid payload" },
+        "401": { "description": "Unauthorized" },
+        "403": { "description": "Forbidden" },
+        "500": { "description": "Internal server error" }
+      }
+    }
+  },
+  "/constants/{constId}": {
+    "put": {
+      "summary": "Update an existing constant",
+      "description": "Protected endpoint; requires authentication.",
+      "tags": ["Constants"],
+      "parameters": [
+        {
+          "in": "path",
+          "name": "constId",
+          "required": true,
+          "schema": { "type": "string" }
+        }
+      ],
+      "responses": {
+        "200": { "description": "Constant updated" },
+        "400": { "description": "Invalid payload" },
+        "401": { "description": "Unauthorized" },
+        "403": { "description": "Forbidden" },
+        "500": { "description": "Internal server error" }
+      }
+    },
+    "delete": {
+      "summary": "Delete a constant",
+      "description": "Protected endpoint; requires authentication.",
+      "tags": ["Constants"],
+      "parameters": [
+        {
+          "in": "path",
+          "name": "constId",
+          "required": true,
+          "schema": { "type": "string" }
+        }
+      ],
+      "responses": {
+        "200": { "description": "Constant deleted" },
+        "401": { "description": "Unauthorized" },
+        "403": { "description": "Forbidden" },
+        "500": { "description": "Internal server error" }
+      }
+    }
+  }
+}

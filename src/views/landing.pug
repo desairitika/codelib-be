@@ -1,0 +1,93 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title CodeLib
+    link(rel="icon" href="images/favicon.ico" type="image/x-icon")
+    link(rel="stylesheet" href="/stylesheets/style.css")
+    link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous")
+    script(src='/javascripts/landing.js', defer)
+    script(src="https://code.jquery.com/jquery-3.6.0.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous")
+  body
+    header.navbar.navbar-expand-lg.text-white.fixed-top
+      .container
+        a.navbar-brand(href="#")
+          img.logo(src="/images/logo.png" alt="Our Company Logo" href="/" style="cursor: pointer;")
+        button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation")
+          span.navbar-toggler-icon
+        .collapse.navbar-collapse#navbarNav(style="background: white")
+          ul.navbar-nav.ml-auto
+            li.nav-item
+              a.nav-link(href="#features") Features
+            li.nav-item
+              a.nav-link(href="#about") About Us
+            li.nav-item
+              a.nav-link(href="#contact") Contact Us
+    .main-content
+      .jumbotron.jumbotron-fluid.text-center.text-white.welcome.py-5.background-blend
+        .container
+          h1.display-3.heading Welcome to #{title}
+          p.display-6.lead A library for code.
+      section#features.py-5
+        .container.text-center.features
+          div.h2.p-4.text-white.feature-heading.background-blend Features
+          .row.justify-center
+            .col-lg-4.col-md-6.mb-4
+              .card.shadow-sm.click(type="button", onclick="window.open('api-docs', '_blank');")
+                .card-body
+                  h5.card-title Swagger API Docs
+                  p.card-text Click To Redirect
+            .col-lg-4.col-md-6.mb-4
+              .card.shadow-sm
+                .card-body
+                  h5.card-title Seperate space
+                  p.card-text Users have seperate space for their code only.
+            .col-lg-4.col-md-6.mb-4
+              .card.shadow-sm
+                .card-body
+                  h5.card-title Dashboard
+                  p.card-text Where you can watch your coding stats.
+          .row.justify-center
+            .col-lg-4.col-md-6.mb-4
+              .card.shadow-sm
+                .card-body
+                  h5.card-title Multi Language Online Editor
+                  p.card-text You can use all famous language to code. 
+            .col-lg-4.col-md-6.mb-4
+              .card.shadow-sm
+                .card-body
+                  h5.card-title Code Coversion
+                  p.card-text You can convert code from one language to another.
+      section#about.text-white.py-5
+        .container.background-blend.about
+          h2.text-center.mb-4 About Us
+          .row
+            .col-lg-12
+              p.text-center A application where you can store your all solved coding question and retrieve whenever needed. Edit and run with multi language support.
+      section#contact.py-5
+        .container
+          h2.text-center.mb-4.text-white Contact Us
+          .row.justify-center
+            .col-lg-6
+              form(id="contact-form").text-center
+                .form-group.my-2
+                  input.form-control(id="name" type="text" placeholder="Your Name")
+                .form-group.my-2
+                  input.form-control(id="email" type="email" placeholder="Your Email*" required)
+                .form-group.my-2
+                  textarea.form-control(id="message" rows="5" placeholder="Your Message*" required)
+                button.btn.btn-primary.btn-block(type="submit").my-2.theme-background Submit
+#responseModal.modal.fade(data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="responseModalLabel" aria-hidden="true")
+  .modal-dialog(role="document")
+    .modal-content
+      .modal-header
+        h5.modal-title#responseModalLabel Response
+        button.btn.btn-outline-secondary.close(id="close-modal" type="button" data-dismiss="modal" aria-label="Close") &times;
+      .modal-body.bg-light
+        p#responseMessage 
+
+footer.footer.background-blend.text-white.py-4
+  .container.text-center
+    p Copyright © 2024 CodeLib. All rights reserved.
