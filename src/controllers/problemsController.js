@@ -67,6 +67,17 @@ exports.getProblemById = async (req, res) => {
   }
 };
 
+exports.getProblemSolvers = async (req, res) => {
+  try {
+    const { problemId } = req.params;
+    const response = await ProblemService.getProblemSolvers(problemId);
+    res.status(response.code).json(response);
+  } catch (error) {
+    logger.error(error.message || error);
+    res.status(500).json({ error: "Internal server error. Something went wrong on the server side." });
+  }
+};
+
 exports.updateProblem = async (req, res) => {
   try {
     const { problemId } = req.params;

@@ -6,7 +6,7 @@ const defaultConstants = [
   { value: "string", label: "String", type: "category", icon: "AiOutlineFieldString" },
   { value: "linkedlist", label: "Linked List", type: "category", icon: "LuListEnd" },
   { value: "stack", label: "Stack", type: "category", icon: "RiStackLine" },
-  { value: "queue", label: "Queue", type: "category", icon: "BsCollection" },
+  { value: "queue", label: "Queue", type: "category", icon: "MdOutlineQueue" },
   { value: "tree", label: "Tree", type: "category", icon: "TbBinaryTree" },
   { value: "graph", label: "Graph", type: "category", icon: "GrGraphQl" },
   { value: "dynamicprogramming", label: "Dynamic Programming", type: "category", icon: "MdDynamicFeed" },

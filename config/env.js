@@ -6,6 +6,7 @@ const env = {
   MONGODB_URI: process.env.MONGODB_URI || 'mongodb://localhost:27017/codelib-dev',
   SECRET_KEY: process.env.SECRET_KEY || 'development',
   GMAIL_USER: process.env.GMAIL_USER || 'codelib.noreply@gmail.com',
+  GMAIL_PASS: process.env.GMAIL_PASS,
 };
 
 module.exports = env;

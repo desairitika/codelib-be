@@ -15,6 +15,7 @@ router.post("/filter", authenticateUser, ProblemsController.getFilteredProblems)
 router.get("/download-template", authenticateUser, ProblemsController.downloadTemplate);
 router.post("/upload-template", authenticateUser, upload.single("file"), ProblemsController.uploadTemplate);
 router.get("/:problemId", authenticateUser, ProblemsController.getProblemById);
+router.get("/:problemId/solvers", authenticateUser, ProblemsController.getProblemSolvers);
 router.put("/:problemId", authenticateUser, ProblemsController.updateProblem);
 router.delete("/:problemId", authenticateUser, ProblemsController.deleteProblem);
 

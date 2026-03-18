@@ -80,6 +80,16 @@ class ProblemService {
     }
   }
 
+  static async getProblemSolvers(problemId) {
+    try {
+      const { getProblemSolvers: fetchSolvers } = require("../data/mongoose/solution");
+      const solvers = await fetchSolvers(problemId);
+      return getResponseStructure(200, "message", "Success", solvers);
+    } catch (error) {
+      return dbErrorHandler(error);
+    }
+  }
+
   static async updateProblem(problemId, body) {
     try {
       if (!Object.keys(body).length) {
