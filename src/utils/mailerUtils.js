@@ -28,41 +28,8 @@ const sendMail = async (mailOptions, callback) => {
     // Attempt to send with configured transporter
     transporter.sendMail(mailOptions, async (error, info) => {
       if (error) {
-        logger.warn('Failed to send real email, falling back to Ethereal Test Account', { error: error.message });
-        
-        try {
-          // Create Ethereal Test Account dynamically
-          let testAccount = await nodemailer.createTestAccount();
-          let testTransporter = nodemailer.createTransport({
-            host: "smtp.ethereal.email",
-            port: 587,
-            secure: false, // true for 465, false for other ports
-            auth: {
-              user: testAccount.user, // generated ethereal user
-              pass: testAccount.pass, // generated ethereal password
-            },
-          });
-
-          // Send mail with defined transport object
-          let testInfo = await testTransporter.sendMail(mailOptions);
-          
-          console.log("\n=======================================================");
-          console.log("             [LOCAL DEV TEST EMAIL SENT]               ");
-          console.log(`To: ${mailOptions.to}`);
-          console.log(`Preview URL: ${nodemailer.getTestMessageUrl(testInfo)}`);
-          console.log("=======================================================\n");
-
-          callback(
-            getResponseStructure(
-              200,
-              'message',
-              'Password reset request processed. A test email was generated in the backend console.'
-            )
-          );
-        } catch(fallbackErr) {
-          logger.error('Failed to send Ethereal fallback email', { error: fallbackErr.message });
-          callback(getResponseStructure(500, 'error', 'Failed to send email.'));
-        }
+        logger.error('Failed to send OTP email', { error: error.message });
+        callback(getResponseStructure(500, 'error', 'Failed to send OTP to your email. Check Gmail configuration.'));
       } else {
         logger.info('Email sent', { response: info.response });
         callback(

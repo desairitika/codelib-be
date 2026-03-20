@@ -70,7 +70,7 @@ class AuthService {
       const user = await getUserByUsernameOrEmail(email);
 
       if (user) {
-        const otp = OTPGenerator.generate(6, { digits: true, alphabets: true, upperCase: true, specialChars: false });
+        const otp = OTPGenerator.generate(6, { digits: true, lowerCaseAlphabets: false, upperCaseAlphabets: false, specialChars: false });
 
         userOtpMap[email] = {
           otp,
@@ -88,14 +88,16 @@ class AuthService {
           callback(response);
         });
       } else {
-        return getResponseStructure(
-          200,
-          "message",
-          "Password reset request processed. If the provided email is associated with an account, you will receive a password reset OTP."
+        callback(
+          getResponseStructure(
+            200,
+            "message",
+            "Password reset request processed. If the provided email is associated with an account, you will receive a password reset OTP."
+          )
         );
       }
     } catch (error) {
-      return dbErrorHandler(error);
+      callback(dbErrorHandler(error));
     }
   }
 
@@ -103,18 +105,24 @@ class AuthService {
     try {
       const { email, otp, newPassword } = body;
 
-      if (!userOtpMap[email] || userOtpMap[email].otp !== otp) {
-        return getResponseStructure(400, "message", "Invalid or expired OTP.");
+      const otpEntry = userOtpMap[email];
+      if (!otpEntry || otpEntry.otp !== otp) {
+        return getResponseStructure(400, "error", "Invalid or expired OTP.");
+      }
+
+      // Check OTP expiry (10 minutes)
+      const OTP_EXPIRY_MS = 10 * 60 * 1000;
+      if (new Date() - new Date(otpEntry.createdAt) > OTP_EXPIRY_MS) {
+        delete userOtpMap[email];
+        return getResponseStructure(400, "error", "OTP has expired. Please request a new one.");
       }
 
       const user = await getUserByUsernameOrEmail(email);
-      if (user) {
-        const hashedPassword = newPassword ? await hashPassword(newPassword.trim()) : newPassword;
-        await updateUserById(user.id, {
-          ...user,
-          password: hashedPassword,
-        });
+      if (!user) {
+        return getResponseStructure(404, "error", "User not found.");
       }
+      const hashedPassword = await hashPassword(newPassword.trim());
+      await updateUserById(user.id, { password: hashedPassword });
       delete userOtpMap[email];
       return getResponseStructure(200, "message", "Password reset successful");
     } catch (error) {

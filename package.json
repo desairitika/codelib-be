@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/server",
-    "mon": "nodemon ./bin/server"
+    "mon": "nodemon --ignore src/logs/ ./bin/server"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
