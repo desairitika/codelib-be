@@ -17,11 +17,11 @@ exports.createComment = async (req, res) => {
   try {
     const solutionId = req.baseUrl.split("/")[4];
     const data = req.body;
-    data.createdBy = req.user.id;
+    data.user = req.user.id;
     data.solution = solutionId;
     let solution = await SolutionService.getSolutionById(solutionId);
     if (!solution.data) {
-      res.status(400).json({ error: "Invalid problem ID" });
+      return res.status(400).json({ error: "Invalid problem ID" });
     }
     const response = await CommentService.createComment(data);
     res.status(response.code).json(response);
